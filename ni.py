@@ -16,7 +16,7 @@ tokens = (
     'IF',
     'NAME',
     'NUMBER',  # Python decimals
-    'STRING',  # single quoted strings only; syntax of raw strings
+    'STRING',  # Apenas strings com aspas simples
     'LPAR',
     'RPAR',
     'COLON',
