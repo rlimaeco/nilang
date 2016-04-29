@@ -1064,19 +1064,19 @@ YYLABEL(yyreduce)
 
 case 1:
 #line 44 "nilang.y"
-{ cout << "done with a nilang file!" << endl; ;
+{ cout << "arquivo nILANg compilado!" << endl; ;
     break;}
 case 2:
 #line 47 "nilang.y"
-{ cout << "reading a nilang file version " << yyvsp[-1].fval << endl; ;
+{ cout << "versão da linguagem nilang: " << yyvsp[-1].fval << endl; ;
     break;}
 case 6:
 #line 57 "nilang.y"
-{ cout << "new defined nilang type: " << yyvsp[-1].sval << endl; ;
+{ cout << "novo tipo definido:  " << yyvsp[-1].sval << endl; ;
     break;}
 case 10:
 #line 67 "nilang.y"
-{ cout << "new nilang: " << yyvsp[-5].ival << yyvsp[-4].ival << yyvsp[-3].ival << yyvsp[-2].ival << yyvsp[-1].sval << endl; ;
+{ cout << "novo nilang: " << yyvsp[-5].ival << yyvsp[-4].ival << yyvsp[-3].ival << yyvsp[-2].ival << yyvsp[-1].sval << endl; ;
     break;}
 }
 
@@ -1286,7 +1286,7 @@ YYLABEL(yyerrhandle)
 
 
 int main(int argc, char* argv[]) {
-	// Nilang - Compilador criado para fins academicos
+	// Nilang - Compilador criado para fins acadêmicos
     // 16902 - Rafael da Silva Lima
 
     if (argc > 1)

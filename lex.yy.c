@@ -671,7 +671,7 @@ case 7:
 YY_RULE_SETUP
 #line 21 "nilang.l"
 {
-	// we have to copy because we can't rely on yytext not changing underneath us:
+	// copia do valor pois yytext nao garante a alteracao:
 	yylval.sval = strdup(yytext);
 	return STRING;
 }

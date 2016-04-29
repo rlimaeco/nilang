@@ -16,35 +16,35 @@ extern int line_num;
 void yyerror(const char *s);
 %}
 
-// Bison fundamentally works by asking flex to get the next token, which it
-// returns as an object of type "yystype".  But tokens could be of any
-// arbitrary data type!  So we deal with that in Bison by defining a C union
-// holding each of the types of tokens that Flex could return, and have Bison
-// use that union instead of "int" for the definition of "yystype":
+// Bison fundamentalmente funciona , pedindo flex para obter o próximo token, que ele
+// retorna como um objeto do tipo "yystype" . Mas tokens poderão ser de qualquer
+// tipo de dados arbitrários ! Então, com o em Bison , define-se uma C union
+// mantendo cada um dos tipos de tokens que Flex poderia voltar, e com Bison
+// Use essa union em vez de "int" para a definição de "yystype" :
 %union {
 	int ival;
 	float fval;
 	char *sval;
 }
 
-// define the constant-string tokens:
+// define o token de string constante:
 %token NILANG TYPE
 %token END ENDL
 
-// define the "terminal symbol" token types I'm going to use (in CAPS
-// by convention), and associate each with a field of the union:
+// Define os tokens de simbolo terminal
+// Em maiusculo por definição, e associar cada campo com seu union:
 %token <ival> INT
 %token <fval> FLOAT
 %token <sval> STRING
 
 %%
-// the first rule defined is the highest-level rule, which in our
-// case is just the concept of a whole "nilang file":
+// A primeira regra define o nível mais alto de regra, neste caso
+// será o conceito do arquivo completo nilang:
 nilang:
-	header template body_section footer { cout << "done with a nilang file!" << endl; }
+	header template body_section footer { cout << "arquivo nILANg compilado!" << endl; }
 	;
 header:
-	NILANG FLOAT ENDLS { cout << "reading a nilang file version " << $2 << endl; }
+	NILANG FLOAT ENDLS { cout << "versão da linguagem nilang: " << $2 << endl; }
 	;
 template:
 	typelines
@@ -54,7 +54,7 @@ typelines:
 	| typeline
 	;
 typeline:
-	TYPE STRING ENDLS { cout << "new defined nilang type: " << $2 << endl; }
+	TYPE STRING ENDLS { cout << "novo tipo definido:  " << $2 << endl; }
 	;
 body_section:
 	body_lines
@@ -64,7 +64,7 @@ body_lines:
 	| body_line
 	;
 body_line:
-	INT INT INT INT STRING ENDLS { cout << "new nilang: " << $1 << $2 << $3 << $4 << $5 << endl; }
+	INT INT INT INT STRING ENDLS { cout << "novo nilang: " << $1 << $2 << $3 << $4 << $5 << endl; }
 	;
 footer:
 	END ENDLS
@@ -75,7 +75,7 @@ ENDLS:
 %%
 
 int main(int argc, char* argv[]) {
-	// Nilang - Compilador criado para fins academicos
+	// Nilang - Compilador criado para fins acadêmicos
     // 16902 - Rafael da Silva Lima
 
     if (argc > 1)
