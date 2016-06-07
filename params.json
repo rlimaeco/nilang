@@ -1,0 +1,6 @@
+{
+  "name": "Nilang",
+  "tagline": "",
+  "body": "### Características da linguagem\r\n\r\nA linguagem foi desenvolvida com as seguintes características:\r\n\r\n1.  Suporte dos tipos de dados:  inteiro, real, caracter.\r\n2.  Os comandos a serem tratados são:\r\n\r\n* Comandos de atribuição.\r\n* Comandos de entrada e saída.\r\n* Comandos condicionais.\r\n* Comandos de repetição.\r\n\r\n3.  Operadores relacionais (=,>=,<=,>,<,! =).\r\n4.  Operadores lógicos (and, or, not).\r\n5.  Operadores aritméticos (+,-,*,/,mod).\r\n\r\n### Ferramentas\r\n\r\n* Scanner: Flex\r\n* Parser: Bison\r\n\r\n\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
