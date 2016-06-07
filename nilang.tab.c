@@ -98,28 +98,25 @@ Maintained by Magnus Ekdahl <magnus@debian.org>
 #define YYBISON 1  
 
  #line 88 "/usr/share/bison++/bison.cc"
-#line 2 "nilang.y"
+#line 1 "nilang.y"
 
-#include <cstdio>
-#include <iostream>
-#include <cstdlib>
+    #include <cstdio>
+    #include <cstdlib>
+    #include <string>
+    #include <map>
+    using namespace std;
+    map <string,double> vars;    // map  from  variable  name to value
+    map <string,string> varsStr;    // map  from  variable  name to value
+    extern int yylex();
+    extern void yyerror(char*);
+    void Div0Error(void);
+    void UnknownVarError(string s);
 
-
-using namespace std;
-
-// Definicoes do flex requeridos pelo bison:
-extern "C" int yylex();
-extern "C" int yyparse();
-extern "C" FILE *yyin;
-extern int line_num;
-
-void yyerror(const char *s);
-
-#line 24 "nilang.y"
+#line 15 "nilang.y"
 typedef union {
-	int ival;
-	float fval;
-	char *sval;
+    int      int_val;
+    double   double_val;
+    string*  str_val;
 } yy_parse_stype;
 #define YY_parse_STYPE yy_parse_stype
 #ifndef YY_USE_CLASS
@@ -320,13 +317,31 @@ typedef
 /* TOKEN C */
 
  #line 263 "/usr/share/bison++/bison.cc"
-#define	NILANG	258
-#define	TYPE	259
-#define	END	260
-#define	ENDL	261
-#define	INT	262
-#define	FLOAT	263
-#define	STRING	264
+#define	INT	258
+#define	MAIS	259
+#define	MENOS	260
+#define	VEZES	261
+#define	DIVIDIR	262
+#define	IGUAL	263
+#define	IMPRIME	264
+#define	ABREPAREN	265
+#define	FECHAPAREN	266
+#define	PTEVIR	267
+#define	SE	268
+#define	SENAO	269
+#define	ENQUANTO	270
+#define	QUEBRAR	271
+#define	CONTINUAR	272
+#define	ASPA	273
+#define	MAIOR	274
+#define	MENOR	275
+#define	MAIORIGUAL	276
+#define	MENORIGUAL	277
+#define	ABRECHAVE	278
+#define	FECHACHAVE	279
+#define	VARIAVEL	280
+#define	STRING	281
+#define	REAL	282
 
 
 #line 263 "/usr/share/bison++/bison.cc"
@@ -376,13 +391,31 @@ public:
 /* static const int token ... */
 
  #line 307 "/usr/share/bison++/bison.cc"
-static const int NILANG;
-static const int TYPE;
-static const int END;
-static const int ENDL;
 static const int INT;
-static const int FLOAT;
+static const int MAIS;
+static const int MENOS;
+static const int VEZES;
+static const int DIVIDIR;
+static const int IGUAL;
+static const int IMPRIME;
+static const int ABREPAREN;
+static const int FECHAPAREN;
+static const int PTEVIR;
+static const int SE;
+static const int SENAO;
+static const int ENQUANTO;
+static const int QUEBRAR;
+static const int CONTINUAR;
+static const int ASPA;
+static const int MAIOR;
+static const int MENOR;
+static const int MAIORIGUAL;
+static const int MENORIGUAL;
+static const int ABRECHAVE;
+static const int FECHACHAVE;
+static const int VARIAVEL;
 static const int STRING;
+static const int REAL;
 
 
 #line 307 "/usr/share/bison++/bison.cc"
@@ -391,13 +424,31 @@ static const int STRING;
 enum YY_parse_ENUM_TOKEN { YY_parse_NULL_TOKEN=0
 
  #line 310 "/usr/share/bison++/bison.cc"
-	,NILANG=258
-	,TYPE=259
-	,END=260
-	,ENDL=261
-	,INT=262
-	,FLOAT=263
-	,STRING=264
+	,INT=258
+	,MAIS=259
+	,MENOS=260
+	,VEZES=261
+	,DIVIDIR=262
+	,IGUAL=263
+	,IMPRIME=264
+	,ABREPAREN=265
+	,FECHAPAREN=266
+	,PTEVIR=267
+	,SE=268
+	,SENAO=269
+	,ENQUANTO=270
+	,QUEBRAR=271
+	,CONTINUAR=272
+	,ASPA=273
+	,MAIOR=274
+	,MENOR=275
+	,MAIORIGUAL=276
+	,MENORIGUAL=277
+	,ABRECHAVE=278
+	,FECHACHAVE=279
+	,VARIAVEL=280
+	,STRING=281
+	,REAL=282
 
 
 #line 310 "/usr/share/bison++/bison.cc"
@@ -434,13 +485,31 @@ public:
 #if YY_parse_USE_CONST_TOKEN != 0
 
  #line 341 "/usr/share/bison++/bison.cc"
-const int YY_parse_CLASS::NILANG=258;
-const int YY_parse_CLASS::TYPE=259;
-const int YY_parse_CLASS::END=260;
-const int YY_parse_CLASS::ENDL=261;
-const int YY_parse_CLASS::INT=262;
-const int YY_parse_CLASS::FLOAT=263;
-const int YY_parse_CLASS::STRING=264;
+const int YY_parse_CLASS::INT=258;
+const int YY_parse_CLASS::MAIS=259;
+const int YY_parse_CLASS::MENOS=260;
+const int YY_parse_CLASS::VEZES=261;
+const int YY_parse_CLASS::DIVIDIR=262;
+const int YY_parse_CLASS::IGUAL=263;
+const int YY_parse_CLASS::IMPRIME=264;
+const int YY_parse_CLASS::ABREPAREN=265;
+const int YY_parse_CLASS::FECHAPAREN=266;
+const int YY_parse_CLASS::PTEVIR=267;
+const int YY_parse_CLASS::SE=268;
+const int YY_parse_CLASS::SENAO=269;
+const int YY_parse_CLASS::ENQUANTO=270;
+const int YY_parse_CLASS::QUEBRAR=271;
+const int YY_parse_CLASS::CONTINUAR=272;
+const int YY_parse_CLASS::ASPA=273;
+const int YY_parse_CLASS::MAIOR=274;
+const int YY_parse_CLASS::MENOR=275;
+const int YY_parse_CLASS::MAIORIGUAL=276;
+const int YY_parse_CLASS::MENORIGUAL=277;
+const int YY_parse_CLASS::ABRECHAVE=278;
+const int YY_parse_CLASS::FECHACHAVE=279;
+const int YY_parse_CLASS::VARIAVEL=280;
+const int YY_parse_CLASS::STRING=281;
+const int YY_parse_CLASS::REAL=282;
 
 
 #line 341 "/usr/share/bison++/bison.cc"
@@ -459,11 +528,11 @@ YY_parse_CONSTRUCTOR_CODE;
  #line 352 "/usr/share/bison++/bison.cc"
 
 
-#define	YYFINAL		29
+#define	YYFINAL		28
 #define	YYFLAG		-32768
-#define	YYNTBASE	10
+#define	YYNTBASE	28
 
-#define YYTRANSLATE(x) ((unsigned)(x) <= 264 ? yytranslate[x] : 20)
+#define YYTRANSLATE(x) ((unsigned)(x) <= 282 ? yytranslate[x] : 34)
 
 static const char yytranslate[] = {     0,
      2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -492,81 +561,85 @@ static const char yytranslate[] = {     0,
      2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
      2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
      2,     2,     2,     2,     2,     1,     2,     3,     4,     5,
-     6,     7,     8,     9
+     6,     7,     8,     9,    10,    11,    12,    13,    14,    15,
+    16,    17,    18,    19,    20,    21,    22,    23,    24,    25,
+    26,    27
 };
 
 #if YY_parse_DEBUG != 0
 static const short yyprhs[] = {     0,
-     0,     5,     9,    11,    14,    16,    20,    22,    25,    27,
-    34,    37,    40
+     0,     2,     5,     7,    11,    16,    20,    24,    26,    30,
+    34,    36,    38,    40
 };
 
-static const short yyrhs[] = {    11,
-    12,    15,    18,     0,     3,     8,    19,     0,    13,     0,
-    13,    14,     0,    14,     0,     4,     9,    19,     0,    16,
-     0,    16,    17,     0,    17,     0,     7,     7,     7,     7,
-     9,    19,     0,     5,    19,     0,    19,     6,     0,     6,
-     0
+static const short yyrhs[] = {    29,
+     0,    29,    30,     0,    30,     0,     9,    31,    12,     0,
+    25,     8,    31,    12,     0,    31,     4,    32,     0,    31,
+     5,    32,     0,    32,     0,    32,     6,    33,     0,    32,
+     7,    33,     0,    33,     0,    25,     0,    27,     0,    10,
+    31,    11,     0
 };
 
 #endif
 
 #if (YY_parse_DEBUG != 0) || defined(YY_parse_ERROR_VERBOSE) 
 static const short yyrline[] = { 0,
-    43,    46,    49,    52,    54,    56,    59,    62,    64,    66,
-    69,    72,    74
+    35,    37,    37,    39,    40,    42,    43,    44,    47,    48,
+    50,    52,    54,    55
 };
 
-static const char * const yytname[] = {   "$","error","$illegal.","NILANG","TYPE",
-"END","ENDL","INT","FLOAT","STRING","nilang","header","template","typelines",
-"typeline","body_section","body_lines","body_line","footer","ENDLS",""
+static const char * const yytname[] = {   "$","error","$illegal.","INT","MAIS",
+"MENOS","VEZES","DIVIDIR","IGUAL","IMPRIME","ABREPAREN","FECHAPAREN","PTEVIR",
+"SE","SENAO","ENQUANTO","QUEBRAR","CONTINUAR","ASPA","MAIOR","MENOR","MAIORIGUAL",
+"MENORIGUAL","ABRECHAVE","FECHACHAVE","VARIAVEL","STRING","REAL","parsetree",
+"lines","line","expression","interno1","interno2",""
 };
 #endif
 
 static const short yyr1[] = {     0,
-    10,    11,    12,    13,    13,    14,    15,    16,    16,    17,
-    18,    19,    19
+    28,    29,    29,    30,    30,    31,    31,    31,    32,    32,
+    32,    33,    33,    33
 };
 
 static const short yyr2[] = {     0,
-     4,     3,     1,     2,     1,     3,     1,     2,     1,     6,
-     2,     2,     1
+     1,     2,     1,     3,     4,     3,     3,     1,     3,     3,
+     1,     1,     1,     3
 };
 
 static const short yydefact[] = {     0,
-     0,     0,     0,     0,     0,     3,     5,    13,     2,     0,
-     0,     0,     7,     9,     4,    12,     6,     0,     0,     1,
-     8,     0,    11,     0,     0,    10,     0,     0,     0
+     0,     0,     1,     3,     0,    12,    13,     0,     8,    11,
+     0,     2,     0,     0,     0,     4,     0,     0,     0,    14,
+     6,     7,     9,    10,     5,     0,     0,     0
 };
 
-static const short yydefgoto[] = {    27,
-     2,     5,     6,     7,    12,    13,    14,    20,     9
+static const short yydefgoto[] = {    26,
+     3,     4,     8,     9,    10
 };
 
-static const short yypact[] = {    -2,
-    -6,    -1,     0,    -5,     1,    -1,-32768,-32768,     4,     0,
-     5,     2,     1,-32768,-32768,-32768,     4,     6,     0,-32768,
--32768,     7,     4,    -4,     0,     4,    11,    16,-32768
+static const short yypact[] = {    -7,
+   -10,     4,    -7,-32768,   -10,-32768,-32768,    -1,    13,-32768,
+   -10,-32768,     3,   -10,   -10,-32768,   -10,   -10,     1,-32768,
+    13,    13,-32768,-32768,-32768,     9,    25,-32768
 };
 
 static const short yypgoto[] = {-32768,
--32768,-32768,-32768,    12,-32768,-32768,     8,-32768,   -10
+-32768,    -2,     5,     7,     6
 };
 
 
-#define	YYLAST		21
+#define	YYLAST		25
 
 
-static const short yytable[] = {    17,
-     1,     3,     4,    10,    25,     8,    19,    11,    23,    16,
-    28,    18,    22,    24,    26,    29,     0,    15,     0,     0,
-    21
+static const short yytable[] = {     5,
+    12,     1,    14,    15,    14,    15,    14,    15,    27,    13,
+    16,    11,    25,    20,     6,    19,     7,     2,    17,    18,
+    21,    22,    23,    24,    28
 };
 
 static const short yycheck[] = {    10,
-     3,     8,     4,     9,     9,     6,     5,     7,    19,     6,
-     0,     7,     7,     7,    25,     0,    -1,     6,    -1,    -1,
-    13
+     3,     9,     4,     5,     4,     5,     4,     5,     0,     5,
+    12,     8,    12,    11,    25,    11,    27,    25,     6,     7,
+    14,    15,    17,    18,     0
 };
 
 #line 352 "/usr/share/bison++/bison.cc"
@@ -1063,20 +1136,52 @@ YYLABEL(yyreduce)
   switch (yyn) {
 
 case 1:
-#line 44 "nilang.y"
-{ cout << "arquivo nILANg compilado!" << endl; ;
+#line 35 "nilang.y"
+{printf("Compilado com sucesso");;
     break;}
-case 2:
-#line 47 "nilang.y"
-{ cout << "versão da linguagem nilang: " << yyvsp[-1].fval << endl; ;
+case 4:
+#line 39 "nilang.y"
+{printf("%lf\n",yyvsp[-1].double_val);;
+    break;}
+case 5:
+#line 40 "nilang.y"
+{vars[*yyvsp[-3].str_val] = yyvsp[-1].double_val; delete yyvsp[-3].str_val;;
     break;}
 case 6:
-#line 57 "nilang.y"
-{ cout << "novo tipo definido:  " << yyvsp[-1].sval << endl; ;
+#line 42 "nilang.y"
+{yyval.double_val = yyvsp[-2].double_val + yyvsp[0].double_val;;
+    break;}
+case 7:
+#line 43 "nilang.y"
+{yyval.double_val = yyvsp[-2].double_val - yyvsp[0].double_val;;
+    break;}
+case 8:
+#line 44 "nilang.y"
+{yyval.double_val = yyvsp[0].double_val;;
+    break;}
+case 9:
+#line 47 "nilang.y"
+{yyval.double_val = yyvsp[-2].double_val * yyvsp[0].double_val;;
     break;}
 case 10:
-#line 67 "nilang.y"
-{ cout << "novo nilang: " << yyvsp[-5].ival << yyvsp[-4].ival << yyvsp[-3].ival << yyvsp[-2].ival << yyvsp[-1].sval << endl; ;
+#line 49 "nilang.y"
+{if(yyvsp[0].double_val == 0) Div0Error();  else yyval.double_val = yyvsp[-2].double_val / yyvsp[0].double_val;;
+    break;}
+case 11:
+#line 50 "nilang.y"
+{yyval.double_val = yyvsp[0].double_val;;
+    break;}
+case 12:
+#line 53 "nilang.y"
+{if(!vars.count(*yyvsp[0].str_val))  UnknownVarError(*yyvsp[0].str_val); else yyval.double_val = vars[*yyvsp[0].str_val]; delete yyvsp[0].str_val;;
+    break;}
+case 13:
+#line 54 "nilang.y"
+{yyval.double_val = yyvsp[0].double_val;;
+    break;}
+case 14:
+#line 55 "nilang.y"
+{yyval.double_val = yyvsp[-1].double_val;;
     break;}
 }
 
@@ -1282,41 +1387,9 @@ YYLABEL(yyerrhandle)
 /* END */
 
  #line 1038 "/usr/share/bison++/bison.cc"
-#line 75 "nilang.y"
+#line 56 "nilang.y"
 
 
-int main(int argc, char* argv[]) {
-	// Nilang - Compilador criado para fins acadêmicos
-    // 16902 - Rafael da Silva Lima
 
-    if (argc > 1)
-    {
-        std::string arquivoAlvo(argv[1]);
-        const char * nomeArquivo = arquivoAlvo.c_str();
-
-        FILE *arquivo = fopen(nomeArquivo, "r");
-            // testa a validade do arquivo:
-            if (!arquivo) {
-                cout << "Não foi possível abrir o arquivo: " << nomeArquivo << endl;
-                return -1;
-            }
-            // define o lex para ler o arquivo:
-            yyin = arquivo;
-
-            // parse through the input until there is no more:
-            do {
-                yyparse();
-            } while (!feof(yyin));
-    }
-    else
-    {
-        cout << "Favor definir o arquivo a ser compilado" << endl;
-    }
-
-}
-
-void yyerror(const char *s) {
-	cout << "EEK, parse error on line " << line_num << "! Message: " << s << endl;
-	// might as well halt now:
-	exit(-1);
-}
+void  Div0Error(void) {printf("Erro: Divisão por zero\n"); exit(0);}
+void  UnknownVarError(string s) {printf("Erro: %s não existe !\n", s.c_str()); exit (0);}

@@ -1,4 +1,6 @@
-Hello World
-2
-4.20
-555
+a = 100;
+b = 99.3;
+
+
+imprime a;
+

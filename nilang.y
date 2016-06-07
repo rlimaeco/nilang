@@ -1,111 +1,60 @@
-
 %{
-#include <cstdio>
-#include <iostream>
-#include <cstdlib>
-
-
-using namespace std;
-
-// Definicoes do flex requeridos pelo bison:
-extern "C" int yylex();
-extern "C" int yyparse();
-extern "C" FILE *yyin;
-extern int line_num;
-
-void yyerror(const char *s);
+    #include <cstdio>
+    #include <cstdlib>
+    #include <string>
+    #include <map>
+    using namespace std;
+    map <string,double> vars;    // map  from  variable  name to value
+    map <string,string> varsStr;    // map  from  variable  name to value
+    extern int yylex();
+    extern void yyerror(char*);
+    void Div0Error(void);
+    void UnknownVarError(string s);
 %}
 
-// Bison fundamentalmente funciona , pedindo flex para obter o próximo token, que ele
-// retorna como um objeto do tipo "yystype" . Mas tokens poderão ser de qualquer
-// tipo de dados arbitrários ! Então, com o em Bison , define-se uma C union
-// mantendo cada um dos tipos de tokens que Flex poderia voltar, e com Bison
-// Use essa union em vez de "int" para a definição de "yystype" :
 %union {
-	int ival;
-	float fval;
-	char *sval;
+    int      int_val;
+    double   double_val;
+    string*  str_val;
 }
 
-// define o token de string constante:
-%token NILANG TYPE
-%token END ENDL
+%token <int_val> INT MAIS MENOS VEZES DIVIDIR IGUAL IMPRIME ABREPAREN FECHAPAREN PTEVIR
+%token <int_val> SE SENAO ENQUANTO QUEBRAR CONTINUAR ASPA MAIOR MENOR MAIORIGUAL MENORIGUAL
+%token <int_val> ABRECHAVE FECHACHAVE
+%token <str_val> VARIAVEL STRING
+%token <double_val> REAL
 
-// Define os tokens de simbolo terminal
-// Em maiusculo por definição, e associar cada campo com seu union:
-%token <ival> INT
-%token <fval> FLOAT
-%token <sval> STRING
+%type <double_val> expression;
+%type <double_val> interno1;
+%type <double_val> interno2;
+
+%start parsetree
 
 %%
-// A primeira regra define o nível mais alto de regra, neste caso
-// será o conceito do arquivo completo nilang:
-nilang:
-	header template body_section footer { cout << "arquivo nILANg compilado!" << endl; }
-	;
-header:
-	NILANG FLOAT ENDLS { cout << "versão da linguagem nilang: " << $2 << endl; }
-	;
-template:
-	typelines
-	;
-typelines:
-	typelines typeline
-	| typeline
-	;
-typeline:
-	TYPE STRING ENDLS { cout << "novo tipo definido:  " << $2 << endl; }
-	;
-body_section:
-	body_lines
-	;
-body_lines:
-	body_lines body_line
-	| body_line
-	;
-body_line:
-	INT INT INT INT STRING ENDLS { cout << "novo nilang: " << $1 << $2 << $3 << $4 << $5 << endl; }
-	;
-footer:
-	END ENDLS
-	;
-ENDLS:
-    ENDLS ENDL
-    | ENDL ;
+
+parsetree:      lines                                {printf("Compilado com sucesso");};
+
+lines:          lines line | line;
+
+line:           IMPRIME expression PTEVIR             {printf("%lf\n",$2);}
+              | VARIAVEL IGUAL expression PTEVIR      {vars[*$1] = $3; delete $1;};
+
+expression:     expression MAIS interno1                {$$ = $1 + $3;}
+              | expression MENOS interno1               {$$ = $1 - $3;}
+              | interno1                                {$$ = $1;};
+
+
+interno1:       interno1 VEZES interno2                 {$$ = $1 * $3;}
+              | interno1 DIVIDIR interno2
+                {if($3 == 0) Div0Error();  else $$ = $1 / $3;}
+              | interno2                                {$$ = $1;};
+
+interno2:       VARIAVEL
+                {if(!vars.count(*$1))  UnknownVarError(*$1); else $$ = vars[*$1]; delete $1;}
+              | REAL                                     {$$ = $1;}
+              | ABREPAREN expression FECHAPAREN          {$$ = $2;};
 %%
 
-int main(int argc, char* argv[]) {
-	// Nilang - Compilador criado para fins acadêmicos
-    // 16902 - Rafael da Silva Lima
 
-    if (argc > 1)
-    {
-        std::string arquivoAlvo(argv[1]);
-        const char * nomeArquivo = arquivoAlvo.c_str();
-
-        FILE *arquivo = fopen(nomeArquivo, "r");
-            // testa a validade do arquivo:
-            if (!arquivo) {
-                cout << "Não foi possível abrir o arquivo: " << nomeArquivo << endl;
-                return -1;
-            }
-            // define o lex para ler o arquivo:
-            yyin = arquivo;
-
-            // parse through the input until there is no more:
-            do {
-                yyparse();
-            } while (!feof(yyin));
-    }
-    else
-    {
-        cout << "Favor definir o arquivo a ser compilado" << endl;
-    }
-
-}
-
-void yyerror(const char *s) {
-	cout << "EEK, parse error on line " << line_num << "! Message: " << s << endl;
-	// might as well halt now:
-	exit(-1);
-}
+void  Div0Error(void) {printf("Erro: Divisão por zero\n"); exit(0);}
+void  UnknownVarError(string s) {printf("Erro: %s não existe !\n", s.c_str()); exit (0);}

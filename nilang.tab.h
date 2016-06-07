@@ -13,11 +13,11 @@
 
  #line 8 "/usr/share/bison++/bison.h"
 
-#line 24 "nilang.y"
+#line 15 "nilang.y"
 typedef union {
-	int ival;
-	float fval;
-	char *sval;
+    int      int_val;
+    double   double_val;
+    string*  str_val;
 } yy_parse_stype;
 #define YY_parse_STYPE yy_parse_stype
 #ifndef YY_USE_CLASS
@@ -191,13 +191,31 @@ typedef
 
 
  #line 169 "/usr/share/bison++/bison.h"
-#define	NILANG	258
-#define	TYPE	259
-#define	END	260
-#define	ENDL	261
-#define	INT	262
-#define	FLOAT	263
-#define	STRING	264
+#define	INT	258
+#define	MAIS	259
+#define	MENOS	260
+#define	VEZES	261
+#define	DIVIDIR	262
+#define	IGUAL	263
+#define	IMPRIME	264
+#define	ABREPAREN	265
+#define	FECHAPAREN	266
+#define	PTEVIR	267
+#define	SE	268
+#define	SENAO	269
+#define	ENQUANTO	270
+#define	QUEBRAR	271
+#define	CONTINUAR	272
+#define	ASPA	273
+#define	MAIOR	274
+#define	MENOR	275
+#define	MAIORIGUAL	276
+#define	MENORIGUAL	277
+#define	ABRECHAVE	278
+#define	FECHACHAVE	279
+#define	VARIAVEL	280
+#define	STRING	281
+#define	REAL	282
 
 
 #line 169 "/usr/share/bison++/bison.h"
@@ -246,13 +264,31 @@ public:
   /* static const int token ... */
   
  #line 212 "/usr/share/bison++/bison.h"
-static const int NILANG;
-static const int TYPE;
-static const int END;
-static const int ENDL;
 static const int INT;
-static const int FLOAT;
+static const int MAIS;
+static const int MENOS;
+static const int VEZES;
+static const int DIVIDIR;
+static const int IGUAL;
+static const int IMPRIME;
+static const int ABREPAREN;
+static const int FECHAPAREN;
+static const int PTEVIR;
+static const int SE;
+static const int SENAO;
+static const int ENQUANTO;
+static const int QUEBRAR;
+static const int CONTINUAR;
+static const int ASPA;
+static const int MAIOR;
+static const int MENOR;
+static const int MAIORIGUAL;
+static const int MENORIGUAL;
+static const int ABRECHAVE;
+static const int FECHACHAVE;
+static const int VARIAVEL;
 static const int STRING;
+static const int REAL;
 
 
 #line 212 "/usr/share/bison++/bison.h"
@@ -261,13 +297,31 @@ static const int STRING;
   enum YY_parse_ENUM_TOKEN { YY_parse_NULL_TOKEN=0
   
  #line 215 "/usr/share/bison++/bison.h"
-	,NILANG=258
-	,TYPE=259
-	,END=260
-	,ENDL=261
-	,INT=262
-	,FLOAT=263
-	,STRING=264
+	,INT=258
+	,MAIS=259
+	,MENOS=260
+	,VEZES=261
+	,DIVIDIR=262
+	,IGUAL=263
+	,IMPRIME=264
+	,ABREPAREN=265
+	,FECHAPAREN=266
+	,PTEVIR=267
+	,SE=268
+	,SENAO=269
+	,ENQUANTO=270
+	,QUEBRAR=271
+	,CONTINUAR=272
+	,ASPA=273
+	,MAIOR=274
+	,MENOR=275
+	,MAIORIGUAL=276
+	,MENORIGUAL=277
+	,ABRECHAVE=278
+	,FECHACHAVE=279
+	,VARIAVEL=280
+	,STRING=281
+	,REAL=282
 
 
 #line 215 "/usr/share/bison++/bison.h"
