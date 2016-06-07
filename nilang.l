@@ -36,7 +36,7 @@ int yyparse(void);
 "*"                        {return VEZES;}
 "/"                        {return DIVIDIR;}
 "("                        {return ABREPAREN;}
-")"                        {return FECHAPAREN;
+")"                        {return FECHAPAREN;}
 "{"                        {return ABRECHAVE;}
 "}"                        {return FECHACHAVE;}
 ">"                        {return MAIOR;}
